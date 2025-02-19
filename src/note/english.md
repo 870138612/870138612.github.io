@@ -19,9 +19,7 @@ tag:
 }
 
 ```
-* 输出
-成功或失败
-* 示例
+* 输出示例
 {
     "result" : 0
 }
@@ -42,8 +40,7 @@ URL: /rest/rackmanager/v1/memorypooling/memborrow_strategy
     "borrowSize": 1048576 # 借用大小，单位kb,要求128M的整数倍
 }
 ```
-* 输出
-* 示例
+* 输出示例
 ```json
 {
     "srcParam": {
@@ -68,9 +65,7 @@ URL: /rest/rackmanager/v1/memorypooling/memborrow_strategy
 METHOD: POST 
 URL: /rest/rackmanager/v1/memorypooling/migrate_strategy
 
-* 输入
-待分配的节点ID和分配大小以及虚机pid和最大迁移比例
-* 示例
+* 输入示例
 ```json
 {
   "borrowInNode": "Node1",
@@ -100,9 +95,7 @@ URL: /rest/rackmanager/v1/memorypooling/migrate_strategy
 ```
 
 ### 内存借用执行
-* 输入
-借用策略的输出，原封不动输入
-* 示例
+* 输入示例
 ```json
 {
 	"srcParam": {
@@ -123,9 +116,7 @@ URL: /rest/rackmanager/v1/memorypooling/migrate_strategy
 	]
 }
 ```
-* 输出
-输出借用结果和借用唯一标识符列表
-* 示例
+* 输出示例
 ```json
 { 
         "borrowIds" : [“q4554t176afdg34d6fs”] , 
