@@ -1,37 +1,173 @@
 ---
-title: 英语作文模板
+title: 内存操作请求
 star: true
 icon: page
 category:
-    - 英语
+    - 内存操作请求
 tag: 
-    - 英语
+    - 内存操作请求
 ---
 
-### 书信类
+### 同步反亲和性
+* 输入
+当前决策numa节点所在rack内的反亲和性信息
+结构：map<string, vector<string>> nodeids，表示某节点的反亲和节点列表
+示例
+```json
+{
+  "node1": ["node2","node3"]
+}
 
-Hearing that ____, I am writing this email to give you my recommendation.
+```
+* 输出
+成功或失败
+* 示例
+{
+    "result" : 0
+}
 
-In my opinion, ____.
+### 内存借用策略
+METHOD: POST 
+URL: /rest/rackmanager/v1/memorypooling/memborrow_strategy
+* 输入
+借入的numa节点信息和借用大小
+示例
+```json
+{
+    "srcParam": {
+        "srcNid": "Node1", # node_id
+        "srcSocketId": 0, # socket_id
+        "srcNumaId": 0  # numa_id
+    },
+    "borrowSize": 1048576 # 借用大小，单位kb,要求128M的整数倍
+}
+```
+* 输出
+* 示例
+```json
+{
+    "srcParam": {
+        "srcNid": "Node1",
+        "srcSocketId": 0,
+        "srcNumaId": 3
+    },
+    "borrowSize": 1048576,
+    "destParam": [
+        {
+            "destNid": "Node0",
+            "destSocketId": 0, 
+            "destNumaNum": 1,
+            "destNumaId": [1],
+            "memSize": [1048576]
+        }
+    ]
+}
+```
 
-The primacy factors for my recommendation are as follows.
+### 内存迁移策略
+METHOD: POST 
+URL: /rest/rackmanager/v1/memorypooling/migrate_strategy
 
-For one thing, ____.
+* 输入
+待分配的节点ID和分配大小以及虚机pid和最大迁移比例
+* 示例
+```json
+{
+  "borrowInNode": "Node1",
+  "borrowSize": 1048576,
+  "vmInfoList": [
+    {
+      "pid": 1569351,
+      "ratio": 25
+    }
+  ]
+}
+```
+* 输出
+迁移结果：迁移执行的时长和确定的虚机迁出比例
+```json
+{ 
+    "result": 0, 
+    "vmInfoList": [ 
+        { 
+            "pid": 1181526, 
+            "ratio": 7, 
+            "destNumaId": 1 
+        } 
+	],
+	"waitingTime": 5000 
+}
+```
 
-For another, ____.
+### 内存借用执行
+* 输入
+借用策略的输出，原封不动输入
+* 示例
+```json
+{
+	"srcParam": {
+		"srcNid": "Node1",
+		"srcSocketId": 0,
+		"srcNumaId": 0
+	},
+	"destParams": [
+		{
+			"destNid": "Node2",
+			"destSocketId": 0,
+			"destNumaNum": 1,
+			"destNumaId": [2],
+			"memSize": [
+				1048576
+			]
+		}
+	]
+}
+```
+* 输出
+输出借用结果和借用唯一标识符列表
+* 示例
+```json
+{ 
+        "borrowIds" : [“q4554t176afdg34d6fs”] , 
+        "presentNumaId" : [5] 
+}
+```
 
-I hope you will find my suggestions conductive.
+### 内存迁移执行
+METHOD: POST 
+URL: /rest/rackmanager/v1/memorypooling/migrate_execute
 
-### 图表类型-静态图
+* 输入
+* 示例
+```json
+{
+	"borrowInNode": "Node1",
+	"memMigrateTotalSize": 1048576,
+	"waitingTime": 5000,
+	"vmInfoList": [
+		{
+            "pid" : 1181526,
+            "ratio" : 25,
+            "destNumaId" : [1]
+        }，
+        {
+            "pid" : 1181740,
+            "ratio" : 25,
+            "destNumaId" : [1]
+        }
+	]
+}
+```
+* 输出
+根据状态码判断成功或失败
 
-   Given is a pie chart, clearly illustrating the remarkable contrasts in the **主体** in **地点** during **时间**. Based upon the data, ____ ranks the first, accounting for ____%. Then, the second is ____, with ____ %. Finally come ____ and ____.
-   Such statistics, apparently, can be associated with the ____. There exist a train of reasons that contribute to this phenomenon, but some deserve special emphasis. To begin with, ____ was 
-   characterized by ____, which enabled ____ to ____. In addition, compared with ____, _____. Thus, ____.
-   Taking all these factors into consideration, we may predict that there is a growing/decreasing tendency for **sb** to do **sth**, which I believe will not change in a short time. Accoringly, ____ are supposed to ____. Besides, it is advisable for authorities to work out comprehensive strategies to ____.
 
-
-#### 图表类型-动态图
-
-   Given is a  bar chart/line graph clearly illustrating the reamarkable contrasts in / between **主体1** and **主体2** from **时间1** to **时间2**. During this period/year, the ____ ascended significantly, arriving at approximately ____%. By contrast, the ____ demonstrated a sharp/slight decline, form ____% to ____%. Meanwhile, the proportion for ____ remained stable at ____%.
-   Such statistics can be associated with the ____, but what resulted in the phenomenon? To begin with, ____ was characterized by ____, which enabled ____ to ____. In addition, compared with ____, ____ became ____. Thus ____.
-   Taking all these factors into consideration, we may predict that there is a growing/decreasing tendency for **sb** to do **sth**, which I believe will not change in a short time. Accordingly, ____ are supposed to ____. Besides, it is advisable for authorities to work out comprehensive strategies to ____.
+### 内存归还决策
+METHOD: POST 
+URL: /rest/rackmanager/v1/memorypooling/memfree_execute
+* 输入
+输入指定Node节点
+* 示例
+Node节点
+* 输出
+根据状态码判断成功或失败
