@@ -11,7 +11,7 @@ projects:
 
 
   - icon: nova
-    name: nova-compute
+    name: nova
     desc: nova
     link: /openstack/neutron
     
