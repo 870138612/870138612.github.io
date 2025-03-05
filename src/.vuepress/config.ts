@@ -1,9 +1,7 @@
 import { defineUserConfig } from "vuepress";
 import theme from "./theme.js";
-import { markdownMathPlugin } from '@vuepress/plugin-markdown-math';
 
 export default defineUserConfig({
-
   base: "/",
   head: [
     ["meta", {name: "robots", content: "all"}],
@@ -23,12 +21,5 @@ export default defineUserConfig({
   },
   theme,
   plugins: [
-    markdownMathPlugin({
-      // 选项
-
-    }),
    ]
-
-  // Enable it with pwa
-  // shouldPrefetch: false,
 });
