@@ -1,6 +1,6 @@
 ---
 title: openstack
-icon: openstack 
+icon: ops 
 index: false
 cover: /home/sky.jpg
 pageInfo: false
