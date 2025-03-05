@@ -8,7 +8,6 @@ export const zhSidebar = sidebar({
       icon: "openstack",
       prefix: "openstack/",
       children: "structure",
-    },
-    "intro.md"
+    }
   ],
 });
