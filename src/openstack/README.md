@@ -1,5 +1,5 @@
 ---
-title: Openstack代码相关
+title: Openstack
 icon: openstack 
 index: false
 cover: /home/sky.jpg
