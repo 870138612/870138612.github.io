@@ -1,5 +1,5 @@
 ---
-title: openstack
+title: Openstack
 icon: openstack 
 index: false
 cover: /home/sky.jpg
