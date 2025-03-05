@@ -1,9 +1,9 @@
 ---
-title: 政治
+title: nova-compute
 star: true
 icon: page
 category:
-    - 政治
+    - nova
 tag: 
-    - 政治
+    - nova-compute
 ---
