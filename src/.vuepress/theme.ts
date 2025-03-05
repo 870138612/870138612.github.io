@@ -33,6 +33,7 @@ export default hopeTheme({
         "ReadingTime",
     ],
     blog: {
+        timeline: "一天一天",
         sidebarDisplay: "mobile",
         intro: "/intro.html",
     },

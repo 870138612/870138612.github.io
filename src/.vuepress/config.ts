@@ -20,6 +20,7 @@ export default defineUserConfig({
     },
   },
   theme,
+
   plugins: [
    ]
 });
