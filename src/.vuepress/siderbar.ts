@@ -4,7 +4,7 @@ export const zhSidebar = sidebar({
     "/": [
         {
             collapsible: true,
-            text: "Openstack",
+            text: "openstack",
             icon: "openstack",
             prefix: "openstack/",
             children: "structure",
