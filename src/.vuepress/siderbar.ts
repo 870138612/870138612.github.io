@@ -9,6 +9,6 @@ export const zhSidebar = sidebar({
       prefix: "openstack/",
       children: "structure",
     },
-    intro.md
+    "intro.md"
   ],
 });
