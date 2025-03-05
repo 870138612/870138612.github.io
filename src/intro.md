@@ -1,5 +1,5 @@
 ---
-icon: aboutme
+icon: wenhao
 cover: /home/aboutme.jpg
 editLink: false
 article: false
