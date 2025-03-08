@@ -8,13 +8,10 @@ bgImage: /home/img.jpg
 heroText: 终将美好
 tagline: 我们的春夏秋冬
 projects:
-
-
   - icon: nova
     name: nova
     desc: nova
     link: /openstack/neutron
-    
   - icon: net
     name: neutron
     desc: neutron

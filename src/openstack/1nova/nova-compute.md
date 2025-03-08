@@ -3,7 +3,7 @@ title: nova-compute
 star: true
 icon: page
 category:
-    - nova
+  - nova
 tag: 
-    - nova-compute
+  - nova-compute
 ---
