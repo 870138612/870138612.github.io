@@ -2,6 +2,7 @@ import {defineUserConfig} from "vuepress";
 import theme from "./theme.js";
 
 export default defineUserConfig({
+
     base: "/",
     head: [
         ["meta", {name: "robots", content: "all"}],
