@@ -1,5 +1,5 @@
 ---
-title: 代码走读openstack
+title: 导航
 icon: ops 
 index: false
 cover: /home/sky.jpg
@@ -8,5 +8,5 @@ article: false
 timeline: false
 ---
 
- <Catalog />
+ <Catalog base='/' />
 

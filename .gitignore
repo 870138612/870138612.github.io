@@ -3,3 +3,4 @@
 /src/.vuepress/.temp/
 /.idea/
 /src/.vuepress/.cache/
+/src/.vuepress/dist/

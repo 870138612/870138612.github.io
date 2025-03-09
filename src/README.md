@@ -3,22 +3,26 @@ home: true
 title: 主页
 layout: BlogHome
 icon: home
-heroFullScreen: false
+heroFullScreen: true
 bgImage: /home/img.jpg
 heroText: 终将美好
 tagline: 我们的春夏秋冬
 projects:
   - icon: nova
-    name: nova
+    name: 计算服务nova
     desc: nova
-    link: /openstack/neutron
+    link: /openstack/1nova/
   - icon: net
-    name: neutron
+    name: 网络服务neutron
     desc: neutron
-    link: /openstack/neutron
+    link: /openstack/1neutron/
   - icon: cinder
-    name: cinder
+    name: 卷服务cinder
     desc: cinder
-    link: /openstack/cinder
+    link: /openstack/1cinder/
+  - icon: duihua
+    name: 随记
+    desc: 随记
+    link: /other/
 ---
 

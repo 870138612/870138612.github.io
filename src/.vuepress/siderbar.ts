@@ -9,6 +9,13 @@ export const zhSidebar = sidebar({
             prefix: "openstack/",
             children: "structure",
         },
+        {
+            collapsible: true,
+            text: "随记",
+            icon: "duihua",
+            prefix: "other/",
+            children: "structure",
+        },
         "intro.md"
     ],
 });
