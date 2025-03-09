@@ -8,5 +8,5 @@ article: false
 timeline: false
 ---
 
-<Catalog />
+ <Catalog base='/' />
 
