@@ -1,5 +1,5 @@
 ---
-title: openstack中的Service
+title: Service
 star: true
 icon: page
 category:
