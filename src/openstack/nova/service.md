@@ -84,7 +84,7 @@ def __init__(self, host, binary, topic, manager, report_interval=None,
     manager_class = importutils.import_class(self.manager_class_name)
     # 创建api的TARGET
     if objects_base.NovaObject.indirection_api:
-        # API()的init方法展示了创建端点的过程
+        # API()的init()方法展示了创建端点的过程
         conductor_api = conductor.API()
         conductor_api.wait_until_ready(context.get_admin_context())
     self.manager = manager_class(host=self.host, *args, **kwargs)
@@ -104,7 +104,8 @@ def __init__(self, host, binary, topic, manager, report_interval=None,
 ```python
 def __init__(self, topic):
     super(BaseAPI, self).__init__()
-    # 使用oslo_message组件进行rpc通信 Target方法还有fanout表示是否广播，server表示一个Target下某个精确的server，如果不指定server，则轮训发送到这个rpcserver下的一个server，
+    # 使用oslo_message组件进行rpc通信，Target类中包含属性fanout表示是否广播，server表示一个Target下某个精确的server，如果不指定server，则轮训发送到这个rpcserver
+    下的一个server，
     target = messaging.Target(topic=topic,
                               namespace=_NAMESPACE,
                               version='1.0')
@@ -433,6 +434,3 @@ def server(sock, site,
 
 可以发现，决定是否接受新的请求取决于`is_accepting`，所以在使用`eventlet.wsgi.server`创建HTTP监听服务时，可以在`stop`执行时，将`is_accepting=False`，此时`WSGIServer`不会再接受新的请求，并进行优雅关闭
 
-## ServiceLauncher
-
-nova中的服务使用启动器进行统一管理，

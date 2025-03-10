@@ -16,11 +16,11 @@ tag:
 
 ## oslo_messaging
 
-🌈相关链接[openstack中的Service](https://ylzhong.top/openstack/nova/openstack_service.html)
+🌈相关链接[openstack中的Service](https://ylzhong.top/openstack/nova/service.html)
 
 ### Transport
 
-在创建`RPCServer`和`RPCClient`都需要指定`transport`，openstack的每个模块中`rpcapi.py`的`init`方法中都会存在`create_transport`方法，本质是调用`msg_transport._get_transport`
+在创建`RPCServer`和`RPCClient`都需要指定`transport`，openstack的每个模块中`rpcapi.py`的`init()`方法中都会存在`create_transport()`方法，本质是调用`msg_transport._get_transport`
 
 ```python
 def _get_transport(conf, url=None, allowed_remote_exmods=None,
@@ -63,7 +63,7 @@ class Transport:
     def _require_driver_features(self, requeue=False):
         self._driver.require_features(requeue=requeue)
 
-    # rpc调用的主要方法，调用driver中的send方法，需要传入target中包含topic参数
+    # rpc调用的主要方法，调用driver中的send()方法，需要传入target中包含topic参数
     def _send(self, target, ctxt, message, wait_for_reply=None, timeout=None,
               call_monitor_timeout=None, retry=None, transport_options=None):
         if not target.topic:
@@ -180,7 +180,7 @@ class AMQPDriverBase(base.BaseDriver):
             LOG.debug('Sending message to topic %s', target.topic)
 
         if wait_for_reply:
-            # 需要监听，则创建一个专用队列，即调用RPCClient.call方法，则会创建一个专用队列
+            # 需要监听，则创建一个专用队列，即调用RPCClient.call()方法，则会创建一个专用队列
             reply_q = self._get_reply_q()
             msg_id = uuid.uuid4().hex
             msg.update({'_msg_id': msg_id})
@@ -236,7 +236,7 @@ class AMQPDriverBase(base.BaseDriver):
                                     transport_options=transport_options)
 		
             if wait_for_reply:
-                # call方法需要等待消息完成，timeout：整个监听过程的超时时间，call_monitor_timeout不为0则添加另一个定时器监听返回消息，超时则抛出异常
+                # call()方法需要等待消息完成，timeout：整个监听过程的超时时间，call_monitor_timeout不为0则添加另一个定时器监听返回消息，超时则抛出异常
                 result = self._waiter.wait(msg_id, timeout,
                                            call_monitor_timeout, reply_q)
                 if isinstance(result, Exception):
