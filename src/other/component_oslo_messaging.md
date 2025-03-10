@@ -14,7 +14,6 @@ tag:
 ---
 
 
-
 ## oslo_messaging
 
 🌈相关链接[openstack中的Service](https://ylzhong.top/openstack/1nova/openstack_service.html)
