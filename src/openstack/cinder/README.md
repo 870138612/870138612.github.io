@@ -9,7 +9,6 @@ category:
   - cinder
 tag:
   - cinder
-toc: false
 ---
 
 <Catalog/>

@@ -9,7 +9,6 @@ category:
   - openstack
 tag:
   - openstack
-toc: false
 ---
 
 
