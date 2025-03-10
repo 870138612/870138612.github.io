@@ -3,12 +3,13 @@ title: 计算服务nova
 icon: nova 
 index: false
 cover: /discoverybackground/ocean1.jpg
-pageInfo: false
-article: false
-timeline: false
+dir:
+  order: 1
+category:
+  - nova
+tag:
+  - nova
 toc: false
 ---
-
-
 
 <Catalog/>

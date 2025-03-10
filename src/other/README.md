@@ -4,9 +4,12 @@ icon: duihua
 index: false
 order: 99
 cover: /discoverybackground/ocean4.jpg
-pageInfo: false
-article: false
-timeline: false
+dir:
+  order: 2
+category:
+  - openstack
+tag:
+  - openstack
 toc: false
 ---
 
