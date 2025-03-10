@@ -1,5 +1,5 @@
 ---
-title: 卷服务cinder
+title: cinder
 icon: cinder 
 index: false
 cover: /discoverybackground/ocean3.jpg

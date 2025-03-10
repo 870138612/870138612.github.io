@@ -1,5 +1,5 @@
 ---
-title: 网络服务neutron
+title: neutron
 icon: net 
 index: false
 cover: /discoverybackground/ocean2.jpg

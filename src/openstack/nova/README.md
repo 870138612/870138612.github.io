@@ -1,5 +1,5 @@
 ---
-title: 计算服务nova
+title: nova
 icon: nova 
 index: false
 cover: /discoverybackground/ocean1.jpg
