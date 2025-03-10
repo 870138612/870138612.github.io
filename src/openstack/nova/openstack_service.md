@@ -230,7 +230,7 @@ def start(self):
 
 ### WSGIService
 
-`WSGIService`主要与`Service`的区别在于`start`方法
+`WSGIService`中使用了`nova.wsgi.Server`，`start`方法：
 
 ```python
 def start(self):
