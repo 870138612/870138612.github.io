@@ -11,15 +11,15 @@ projects:
   - icon: nova
     name: 计算服务nova
     desc: nova
-    link: /openstack/1nova/
+    link: /openstack/nova/
   - icon: net
     name: 网络服务neutron
     desc: neutron
-    link: /openstack/1neutron/
+    link: /openstack/neutron/
   - icon: cinder
     name: 卷服务cinder
     desc: cinder
-    link: /openstack/1cinder/
+    link: /openstack/cinder/
   - icon: duihua
     name: 随记
     desc: 随记
