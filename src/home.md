@@ -1,6 +1,6 @@
 ---
 title: 导航
-icon: ops 
+icon: daohang 
 index: false
 cover: /home/sky.jpg
 pageInfo: false
