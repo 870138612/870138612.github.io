@@ -1,4 +1,3 @@
-```
 ---
 title: PCI直通
 star: true
@@ -6,12 +5,10 @@ icon: page
 category:
   - 设备PCI直通
   - 随记
-
 tag: 
   - PCI passthrough
 ---
 
-```
 
 ## PCI直通
 一些PCI设备提供独占设备能力和共享能力，在使用SR-IOV时，物理设备会被虚拟化为多个PCI设备，虚拟化设备可以分配给不同的主机，在PCI直通的情况下，完整的物理设备只会分配给一个主机。
