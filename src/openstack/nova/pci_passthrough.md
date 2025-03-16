@@ -5,12 +5,14 @@ icon: page
 category:
   - 设备PCI直通
   - 随记
+
 tag: 
   - PCI passthrough
 ---
 
 
-## PCI直通
+
+## PCI直通示例
 一些PCI设备提供独占设备能力和共享能力，在使用SR-IOV时，物理设备会被虚拟化为多个PCI设备，虚拟化设备可以分配给不同的主机，在PCI直通的情况下，完整的物理设备只会分配给一个主机。
 
 ### 计算节点准备
@@ -141,3 +143,55 @@ lspci  # 列出所有 PCI 设备
   dmesg | grep -i vfio  # 检查 VFIO 驱动绑定状态
   cat /proc/cmdline     # 确认内核参数包含 `intel_iommu=on`
   ```
+
+## PciPassthroughFilter
+
+在`nova.conf`配置的过滤器的作用：在创建虚拟机时，通过scheduler顺序执行配置的`filter`中的`host_passes`过滤符合条件的host并返回
+
+```python
+class PciPassthroughFilter(filters.BaseHostFilter, filters.CandidateFilterMixin):
+    # 过滤器检查主机是否有足够的PCI设备满足虚拟机的创建请求
+	# BaseHostFilter基础过滤器，用于调度时执行内部的host_passes方法
+    # CandidateFilterMixin提供候选资源过滤的功能，支持复杂的资源需求匹配
+  	# 只会在创建的时候执行，重构时不执行
+    RUN_ON_REBUILD = False
+	# host_state：主机的当前状态（如资源使用情况、PCI设备信息）
+    # spec_obj：虚拟机的规格请求（如PCI设备需求）
+    def host_passes(self, host_state, spec_obj):
+        pci_requests = spec_obj.pci_requests
+        # 如果没有PCI请求，直接放行
+        if not pci_requests or not pci_requests.requests:
+            return True
+		# 如果主机没有PCI设备信息，则无法满足任何的PCI请求，不符合要求，返回False
+        if not host_state.pci_stats:
+            LOG.debug("%(host_state)s doesn't have the required PCI devices"
+                      " (%(requests)s)",
+                      {'host_state': host_state, 'requests': pci_requests})
+            return False
+		# 检查每个候选是否满足PCI请求
+        good_candidates = self.filter_candidates(
+            host_state,
+           
+            """
+            support_requests比对主机的PCI设备与虚拟机请求（例如数量、vendor_id、product_id）
+            provider_mapping时一个字典，用来记录资源提供者之间的映射关系,例如
+            {
+                # 虚拟功能（VF）的 UUID -> 对应的物理功能（PF）的 UUID
+                "vf_uuid_1": "pf_uuid_123",
+                "vf_uuid_2": "pf_uuid_123",
+                ...
+            }
+            """ 
+            lambda candidate: host_state.pci_stats.support_requests(
+                pci_requests.requests, provider_mapping=candidate["mappings"]
+            ),
+        )
+		# 没有符合要求的PCI设备
+        if not good_candidates:
+            LOG.debug("%(host_state)s doesn't have the required PCI devices"
+                      " (%(requests)s)",
+                      {'host_state': host_state, 'requests': pci_requests})
+            return False
+
+        return True
+```
