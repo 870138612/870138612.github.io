@@ -79,7 +79,7 @@ tag:
 - 通过 Flavor 请求 PCI 设备（示例请求 2 个 `a1` 设备）：
 
   ```ini
-  openstack flavor set m1.large --property "pci_passthrough:alias"="a1:2"
+  openstack flavor set $FLAVOR --property "pci_passthrough:alias"="a1:2"
   ```
 
 
@@ -103,7 +103,7 @@ tag:
 
 **登录实例**
 
-通过SSH或控制台登录实例
+使用对应的`$FLAVOR`创建实例后，通过SSH或控制台登录实例
 
 ```bash
 openstack console url show VM-with-PCI  # 获取控制台 URL
