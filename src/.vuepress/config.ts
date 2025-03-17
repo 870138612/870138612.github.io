@@ -1,5 +1,6 @@
 import {defineUserConfig} from "vuepress";
 import theme from "./theme.js";
+import { searchPlugin } from '@vuepress/plugin-search'
 export default defineUserConfig({
     
     base: "/",
@@ -22,6 +23,8 @@ export default defineUserConfig({
     theme,
 
     plugins: [
-
+        searchPlugin({
+            getExtraFields: (page) => page.content??[]
+        })
     ],
 });
