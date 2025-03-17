@@ -95,7 +95,7 @@ tag:
 - **配置示例**：
 
   ```ini
-  openstack flavor set $FLAVOR --property hw:pci_numa_affinity_policy=preferred
+  openstack flavor set $FLAVOR --property pci_numa_affinity_policy=preferred
   ```
 
 ### 验证PCI直通
