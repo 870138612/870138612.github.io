@@ -30,27 +30,12 @@ tag:
 
 ### 配置nova-compute
 
-- 指定 PCI 设备：
-
-  - 按设备地址配置（示例）：
-
-    ```ini
-    [pci]
-    device_spec = { "address": "0000:41:00.0" }
-    ```
-
-  - 按厂商/产品 ID 配置（示例为 Intel X520 网卡）：
-
-    ```ini
-    [pci]
-    device_spec = { "vendor_id": "8086", "product_id": "154d" }
-    ```
-
-- 定义设备别名：
+-  指定 PCI 设备，定义设备别名：
 
   ```ini
   [pci]
   alias = { "vendor_id":"8086", "product_id":"154d", "device_type":"type-PF", "name":"a1" }
+  passthrough_whitelist = {"vendor_id": "8086", "product_id": "154d"}
   ```
 
   - `device_type`必须指定为`type-PF`（SR-IOV 父设备）、`type-VF`（子设备）或`type-PCI`（非 SR-IOV 设备）。
