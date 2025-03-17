@@ -17,20 +17,20 @@ tag:
 
 ### 计算节点准备
 
-- **硬件要求**：
+- 硬件要求：
   - BIOS 启用 VT-d（Intel）或 AMD-Vi（AMD）。
   - Linux 内核启用 IOMMU：添加`intel_iommu=on`或`amd_iommu=on`到内核参数。
 
-- **验证命令**：
+- 验证命令：
 
   ```bash
   dmesg | grep -i iommu  # 检查 IOMMU 是否启用
   lspci -v               # 查看 PCI 设备信息及地址（如 0000:41:00.0）
   ```
 
-### 配置 nova-compute
+### 配置nova-compute
 
-- **指定 PCI 设备**：
+- 指定 PCI 设备：
 
   - 按设备地址配置（示例）：
 
@@ -46,7 +46,7 @@ tag:
     device_spec = { "vendor_id": "8086", "product_id": "154d" }
     ```
 
-- **定义设备别名**：
+- 定义设备别名：
 
   ```ini
   [pci]
@@ -55,7 +55,7 @@ tag:
 
   - `device_type`必须指定为`type-PF`（SR-IOV 父设备）、`type-VF`（子设备）或`type-PCI`（非 SR-IOV 设备）。
 
-### 配置 nova-scheduler
+### 配置nova-scheduler
 
 - 启用 `PciPassthroughFilter` 过滤器：
 
@@ -73,7 +73,7 @@ tag:
   alias = { "vendor_id":"8086", "product_id":"154d", "device_type":"type-PF", "name":"a1" }
   ```
 
-### **配置 Flavor**
+### 配置 Flavor
 
 - 通过 Flavor 请求 PCI 设备（示例请求 2 个 `a1` 设备）：
 
@@ -84,15 +84,15 @@ tag:
 
 ### 高级配置
 
-##### **PCI-NUMA 亲和策略**
+##### PCI-NUMA 亲和策略
 
-- **策略选项**：
+- 策略选项：
   - `required`：设备必须与实例的 NUMA 节点严格绑定
   - `socket`：设备与实例在同一CPU插槽即可
   - `preferred`：尽量亲和，但不强制
   - `legacy`：默认策略，兼容旧版本行为
 
-- **配置示例**：
+- 配置示例：
 
   ```ini
   openstack flavor set $FLAVOR --property pci_numa_affinity_policy=preferred
@@ -100,7 +100,7 @@ tag:
 
 ### 验证PCI直通
 
-**登录实例**
+- 登录实例
 
 通过SSH或控制台登录实例
 
@@ -108,36 +108,36 @@ tag:
 openstack console url show VM-with-PCI  # 获取控制台 URL
 ```
 
-**检查PCI设备**
+- 检查PCI设备
 
 ```bash
 lspci  # 列出所有 PCI 设备
 ```
 
-**预期输出**
+- 预期输出
 
 ```bash
 00:04.0 Ethernet controller: Intel Corporation 82599ES 10-Gigabit SFI/SFP+ Network Connection (rev 01)
 ```
 
-### **常见问题解决**
+### 常见问题解决
 
-#### **问题 1：实例启动失败**
+#### 问题 1：实例启动失败
 
-- **原因**：PCI 设备未正确配置或资源不足。
+- 原因：PCI 设备未正确配置或资源不足。
 
-- **解决**：
+- 解决：
 
   ```bash
   nova-status upgrade check  # 检查 Nova 服务状态
   openstack hypervisor stats show  # 查看计算节点 PCI 资源池
   ```
 
-#### **问题 2：设备未出现在实例中**
+#### 问题 2：设备未出现在实例中
 
-- **原因**：驱动未正确绑定或 IOMMU 未启用。
+- 原因：驱动未正确绑定或 IOMMU 未启用。
 
-- **解决**：
+- 解决：
 
   ```bash
   dmesg | grep -i vfio  # 检查 VFIO 驱动绑定状态
