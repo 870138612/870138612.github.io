@@ -312,4 +312,4 @@ class AMQPDriverBase(base.BaseDriver):
 ### 流程图
 创建`rpcserver`时会创建三个队列，分别为`topic`、`tppic.server`、`fanout`，`rpcclient`使用`call()
 `方法时，会临时创建一个反向的`reply`队列用于监听，调用任务完成后这个队列就会被删除
-![oslo_messaging通信方式](/image/oslo_messaging.PNG)
+![oslo_messaging通信方式](/image/oslo_messaging.png)
