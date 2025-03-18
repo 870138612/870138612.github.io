@@ -313,3 +313,14 @@ class AMQPDriverBase(base.BaseDriver):
 创建`rpcserver`时会创建三个队列，分别为`topic`、`tppic.server`、`fanout`，`rpcclient`使用`call()
 `方法时，会临时创建一个反向的`reply`队列用于监听，调用任务完成后这个队列就会被删除
 ![oslo_messaging通信方式](/image/oslo_messaging.png)
+**创建rpcserver**
+
+创建rpcserver需要指定`topic`和`server`，创建rpcserver时会创建三个队列与对应类型的交换机绑定，其对应的路由键分别为`topic.server`、`topic`、`topic`
+
+**创建rpcclient**
+
+创建rpcclient需要指定`topic`
+
+-   如果不指定`server`，则消息发送到`topic`消息队列中，并通过轮询的方式发送给消费者（rpcserver）。
+-   如果指定了`server`则会发送给`topic.server`队列，并由一个rpcserver消费。
+-   如果指定`fanout=True`，则消息会发送到`fanout`队列中，订阅该队列的所有消费者都会收到这个消息
