@@ -323,7 +323,6 @@ class AMQPDriverBase(base.BaseDriver):
 -   如果指定`fanout=True`，则消息会发送到`fanout`队列中，订阅该队列的所有消费者都会收到这个消息
 -   使用`call()`方法时，会临时创建一个反向的`reply`队列用于监听，调用任务完成后这个队列就会被删除
 
-![oslo_messaging通信方式](/image/oslo_messaging.png)
 
 **创建rpcserver**
 
