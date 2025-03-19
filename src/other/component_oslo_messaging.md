@@ -309,7 +309,10 @@ class AMQPDriverBase(base.BaseDriver):
                 self._waiter = None
 ```
 
-### 流程
+### 流程图
+
+![oslo_messaging](/image/oslo_messaging.png)
+
 **创建rpcserver**
 
 创建rpcserver需要指定`topic`和`server`，创建rpcserver时会创建三个队列与对应类型的交换机绑定，其对应的路由键分别为`topic.server`、`topic`、`topic`
