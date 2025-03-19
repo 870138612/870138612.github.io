@@ -5,7 +5,7 @@ index: false
 order: 99
 cover: /discoverybackground/ocean4.jpg
 dir:
-  order: 2
+  order: 4
 category:
   - openstack
 tag:

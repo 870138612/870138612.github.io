@@ -3,10 +3,12 @@ title: oslo_messaging组件
 star: true
 icon: page
 category:
-  - openstack组件
+  - openstack
   - 随记
   - oslo_messaging
-tag: 
+  - oslo
+tag:
+  - oslo组件
   - oslo_service
   - Transport
   - RPC
