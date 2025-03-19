@@ -1,5 +1,5 @@
 ---
-title: Launcher
+title: Launcher启动器
 star: true
 icon: page
 category:
