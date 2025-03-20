@@ -315,6 +315,21 @@ class AMQPDriverBase(base.BaseDriver):
 
 ![oslo_messaging](/image/oslo_messaging.png)
 
+1. 默认行为（非`fanout`模式）
+   共享队列+负载均衡：
+
+如果rpcserver使用相同的`topic`（例如`topic=compute`），默认情况下它们会绑定到同一个队列
+
+消息队列中间件（如RabbitMQ）会将消息以轮询（Round-Robin）方式分发给其中一个rpcserver，确保每条消息仅被处理一次
+
+
+2. `fanout`模式行为
+   独立队列+广播：
+
+当rpcclient发送`fanout=True`的消息时，`oslo.messaging`会为每个rpcserver创建一个独立的匿名队列（名称唯一，topic_fanout_uuid），并绑定到Fanout类型的交换机
+
+消息会被复制到所有独立队列，每个rpcserver通过自己的队列接收消息副本
+
 **创建rpcserver**
 
 创建rpcserver需要指定`topic`和`server`，创建rpcserver时会创建三个队列与对应类型的交换机绑定，其对应的路由键分别为`topic.server`、`topic`、`topic`
@@ -325,18 +340,5 @@ class AMQPDriverBase(base.BaseDriver):
 
 -   如果不指定`server`，则消息发送到`topic`消息队列中，并通过轮询的方式发送给消费者（rpcserver）
 -   如果指定了`server`则会发送给`topic.server`队列，并由一个rpcserver消费
--   如果指定`fanout=True`，则消息会发送到`fanout`队列中，订阅该队列的所有消费者都会收到这个消息
+-   如果指定`fanout=True`，则消息会发送到所有`fanout`队列中，订阅该`topic`的所有消费者都会收到这个消息
 -   使用`call()`方法时，会临时创建一个反向的`reply`队列用于监听，调用任务完成后这个队列就会被删除
-
-
-**创建rpcserver**
-
-创建rpcserver需要指定`topic`和`server`，创建rpcserver时会创建三个队列与对应类型的交换机绑定，其对应的路由键分别为`topic.server`、`topic`、`topic`
-
-**创建rpcclient**
-
-创建rpcclient需要指定`topic`
-
--   如果不指定`server`，则消息发送到`topic`消息队列中，并通过轮询的方式发送给消费者（rpcserver）
--   如果指定了`server`则会发送给`topic.server`队列，并由一个rpcserver消费
--   如果指定`fanout=True`，则消息会发送到与交换机连接的所有`fanout`队列中，订阅队列的所有消费者都会收到这个消息
