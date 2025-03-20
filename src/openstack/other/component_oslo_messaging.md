@@ -339,4 +339,4 @@ class AMQPDriverBase(base.BaseDriver):
 
 -   如果不指定`server`，则消息发送到`topic`消息队列中，并通过轮询的方式发送给消费者（rpcserver）
 -   如果指定了`server`则会发送给`topic.server`队列，并由一个rpcserver消费
--   如果指定`fanout=True`，则消息会发送到`fanout`队列中，订阅该队列的所有消费者都会收到这个消息
+-   如果指定`fanout=True`，则消息会发送到与交换机连接的所有`fanout`队列中，订阅队列的所有消费者都会收到这个消息
