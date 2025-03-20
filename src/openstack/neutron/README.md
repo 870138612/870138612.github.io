@@ -2,6 +2,7 @@
 title: 网络服务neutron
 icon: net 
 index: false
+article: false
 cover: /discoverybackground/ocean2.jpg
 dir:
   order: 2
