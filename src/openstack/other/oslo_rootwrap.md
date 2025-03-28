@@ -149,23 +149,38 @@ def changeHugePage(num:int):
 
 例如，对于上面的`root_helper`参数，这个参数是`["sudo", "nova-rootwrap-deamon", "/etc/neutron/rootwrap.conf"]`
 
-执行方式
+**调用方法**
 
 ```python
 from oslo_rootwrap.client import Client
 
-def changeHugePage(huge_page_num:int,numa_id:int):
+
+def change_huge_page(huge_page_num:int,numa_id:int):
+
+    # 定义启动守护进程的命令（需适配实际环境）
+    root_helper_cmd = [
+        "sudo", 
+        "nova-rootwrap-daemon",  # 守护进程入口脚本
+        "/etc/neutron/rootwrap.conf"  # 配置文件路径
+    ]
+
+    # 创建客户端实例
+    client = Client(root_helper_cmd)
+
     filename = "node{}".format(numa_id)
     cmd = ["echo {} > {}".format(huge_page_num,filename)]
 
-    client = Client(rootwrap_daemon_cmd=["sudo", "nova-rootwrap-deamon", "/etc/neutron/rootwrap.conf"])
     client.execute(cmd=cmd)
 ```
 
-该类提供了一个带有以下参数的execute方法：
+#### **守护进程入口脚本**
 
-`userargs`用于运行命令的命令行参数列表；
+通常为`nova-rootwrap-daemon`，指向`oslo_rootwrap.cmd:daemon` 入口点：
 
-`stdin`要传递给子进程的标准输入的字符串;
-
-该方法返回包含以下内容的三元组：子进程返回码；包含从`stdout`流捕获的所有内容的字符串；包含从其`stderr`流中捕获的所有内容的字符串
+```
+# 示例脚本内容（/usr/bin/nova-rootwrap-daemon）
+#!/usr/bin/env python
+from oslo_rootwrap.cmd import daemon
+if __name__ == "__main__":
+    daemon.main()
+```
