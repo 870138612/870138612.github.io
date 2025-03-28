@@ -134,7 +134,7 @@ from oslo_concurrency.processutils import execute
 
 def changeHugePage(huge_page_num:int,numa_id:int):
     filename = "node{}".format(numa_id)
-    cmd = ["echo {} > {}".format(huge_page_num,filename)]
+    cmd = "echo {} > {}".format(huge_page_num,filename)
     execute(cmd=[cmd],run_as_root=True, root_helper='sudo nova-rootwrap /etc/nova/rootwrap.conf')
 
 ```
