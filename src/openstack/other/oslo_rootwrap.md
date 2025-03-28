@@ -147,7 +147,7 @@ def changeHugePage(huge_page_num:int,numa_id:int):
 
 构造函数包含一个可以传递给`Popen`以创建`rootwrap`守护进程的列表
 
-例如，对于上面的`root_helper`参数，这个参数是`["sudo"、"nova-rootwrap-deamon"、"/etc/neutron/rootwrap.conf"]`
+例如，对于上面的`root_helper`参数，这个参数是`["sudo", "nova-rootwrap-deamon", "/etc/neutron/rootwrap.conf"]`
 
 
 该类提供了一个带有以下参数的execute方法：
