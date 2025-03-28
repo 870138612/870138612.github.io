@@ -149,6 +149,18 @@ def changeHugePage(huge_page_num:int,numa_id:int):
 
 例如，对于上面的`root_helper`参数，这个参数是`["sudo", "nova-rootwrap-deamon", "/etc/neutron/rootwrap.conf"]`
 
+执行方式
+
+```python
+from oslo_rootwrap.client import Client
+
+def changeHugePage(huge_page_num:int,numa_id:int):
+    filename = "node{}".format(numa_id)
+    cmd = ["echo {} > {}".format(huge_page_num,filename)]
+
+    client = Client(rootwrap_daemon_cmd=["sudo", "nova-rootwrap-deamon", "/etc/neutron/rootwrap.conf"])
+    client.execute(cmd=cmd)
+```
 
 该类提供了一个带有以下参数的execute方法：
 
