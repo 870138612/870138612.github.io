@@ -23,7 +23,7 @@ tag:
 为了使用`root_wrap`以将普通用户的指令修改为`sudo`运行的指令，且不需要输入密码，则首先需要在`/etc/sudoers`中配置对应的配置项，例如允许`ms`用户运行`nova-rootwrap`
 
 ```ini
-nova ALL = (root) NOPASSWD: /usr/bin/nova-rootwarp /etc/nova/rootwarp.conf*
+nova ALL = (root) NOPASSWD: /usr/bin/nova-rootwrap /etc/nova/rootwrap.conf*
 ```
 
 ### Rootwrap配置
