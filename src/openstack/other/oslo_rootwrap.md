@@ -132,10 +132,10 @@ chown: PathFilter, /bin/chown, root, nova, /var/lib/images
 ```python
 from oslo_concurrency.processutils import execute
 
-def changeHugePage(huge_page_num:int,numa_id:int):
-    filename = "node{}".format(numa_id)
-    cmd = "echo {} > {}".format(huge_page_num,filename)
-    execute(cmd=[cmd],run_as_root=True, root_helper='sudo nova-rootwrap /etc/nova/rootwrap.conf')
+def changeHugePage(num:int):
+    filename = "node{}".format(num)
+    cmd = ["echo a > {}".format(filename)]
+    execute1 = execute(cmd=cmd,shell=True,run_as_root=True, root_helper='sudo nova-rootwrap /etc/nova/rootwrap.conf')
 
 ```
 
