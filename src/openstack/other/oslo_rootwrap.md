@@ -28,7 +28,7 @@ ms ALL = (root) NOPASSWD: /usr/bin/nova-rootwrap /etc/nova/rootwrap.conf*
 
 ### Rootwrap配置
 
-`nova-rootwrap`的运行依赖于配置文件`rootwrap.conf`，文件需要具有`root`用户的写入和拥有权限，其参数包含以下：
+在`/etc/nova`目录下，`nova-rootwrap`的运行依赖于配置文件`rootwrap.conf`，文件需要具有`root`用户的写入和拥有权限，其参数包含以下：
 
 #### [DEAFAULT]配置
 
