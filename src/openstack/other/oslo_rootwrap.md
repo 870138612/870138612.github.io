@@ -160,8 +160,8 @@ def change_huge_page(huge_page_num:int,numa_id:int):
     # 定义启动守护进程的命令（需适配实际环境）
     root_helper_cmd = [
         "sudo", 
-        "nova-rootwrap-daemon",  # 守护进程入口脚本
-        "/etc/neutron/rootwrap.conf"  # 配置文件路径
+        "nova-rootwrap",  # 守护进程入口脚本
+        "/etc/nova/rootwrap.conf"  # 配置文件路径
     ]
 
     # 创建客户端实例
@@ -173,9 +173,9 @@ def change_huge_page(huge_page_num:int,numa_id:int):
     client.execute(cmd=cmd)
 ```
 
-#### **守护进程入口脚本**
+**守护进程入口脚本**
 
-通常为`nova-rootwrap-daemon`，指向`oslo_rootwrap.cmd:daemon` 入口点：
+通常为`nova-rootwrap`，指向`oslo_rootwrap.cmd:daemon` 入口点：
 
 ```
 # 示例脚本内容（/usr/bin/nova-rootwrap-daemon）
@@ -183,4 +183,3 @@ def change_huge_page(huge_page_num:int,numa_id:int):
 from oslo_rootwrap.cmd import daemon
 if __name__ == "__main__":
     daemon.main()
-```
