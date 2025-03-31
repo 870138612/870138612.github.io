@@ -183,3 +183,7 @@ def change_huge_page(huge_page_num:int,numa_id:int):
 from oslo_rootwrap.cmd import daemon
 if __name__ == "__main__":
     daemon.main()
+
+### 总结
+
+本质是通过配置`/etc/soduers`对`oslo_rootwrap`操作进行提权，运行的指令会经过`oslo_rootwrap`组件执行相关的操作，即在sh指令之前添加上`sodu rootwrap /etc/nova/rootwrap.conf xxx`
