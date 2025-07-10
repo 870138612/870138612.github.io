@@ -1,4 +1,3 @@
-```
 ---
 title: pod配置详解
 star: true
@@ -6,7 +5,6 @@ icon: page
 category:
   - 随记
 ---
-```
 
 ## 编写一个pod配置文件
 

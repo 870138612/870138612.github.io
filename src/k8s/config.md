@@ -1,4 +1,3 @@
-```
 ---
 title: repo文件与配置文件
 star: true
@@ -6,7 +5,6 @@ icon: page
 category:
   - 随记
 ---
-```
 
 
 
