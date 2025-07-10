@@ -1,4 +1,4 @@
-import{_ as i}from"./plugin-vue_export-helper-DlAUqK2U.js";import{c as a,d as n,o as e}from"./app-XDQBnrlH.js";const l={};function t(p,s){return e(),a("div",null,s[0]||(s[0]=[n(`<div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>---</span></span>
+import{_ as i}from"./plugin-vue_export-helper-DlAUqK2U.js";import{c as a,d as n,o as e}from"./app-yYaGEcx_.js";const l={};function t(p,s){return e(),a("div",null,s[0]||(s[0]=[n(`<div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>---</span></span>
 <span class="line"><span>title: pod配置详解</span></span>
 <span class="line"><span>star: true</span></span>
 <span class="line"><span>icon: page</span></span>
